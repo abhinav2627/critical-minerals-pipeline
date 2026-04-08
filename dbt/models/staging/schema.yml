@@ -1,0 +1,71 @@
+version: 2
+
+models:
+  - name: stg_geochemistry
+    description: "Cleaned geochemistry features from USGS National Geochemical Survey — 74,349 samples"
+    columns:
+      - name: latitude
+        description: "Sample latitude in WGS84"
+        tests:
+          - not_null
+      - name: longitude
+        description: "Sample longitude in WGS84"
+        tests:
+          - not_null
+      - name: copper_ppm
+        description: "Copper concentration in parts per million"
+        tests:
+          - not_null
+      - name: mineralisation_score
+        description: "Composite mineralisation score from weighted element z-scores"
+        tests:
+          - not_null
+
+  - name: stg_satellite
+    description: "Satellite spectral features from Landsat 8 Nevada scene — 13,127 sampled pixels"
+    columns:
+      - name: easting
+        description: "UTM easting in metres (EPSG:32611)"
+        tests:
+          - not_null
+      - name: alteration_score
+        description: "Composite hydrothermal alteration score (0-1)"
+        tests:
+          - not_null
+
+  - name: stg_drilling
+    description: "Drill hole composites from Project 3 — 5,232 two-metre intervals"
+    columns:
+      - name: hole_id
+        description: "Unique drill hole identifier"
+        tests:
+          - not_null
+      - name: copper_ppm
+        description: "Length-weighted composite copper grade in ppm"
+        tests:
+          - not_null
+
+  - name: stg_geophysics
+    description: "Airborne magnetic features from GeoDAWN USGS EarthMRI 2022 — 597 grid cells"
+    columns:
+      - name: latitude
+        tests:
+          - not_null
+      - name: mag_anomaly_nt
+        description: "Magnetic anomaly in nanoteslas after IGRF removal"
+        tests:
+          - not_null
+
+  - name: stg_ml_predictions
+    description: "XGBoost deposit predictions — AUC 0.90 — 74,349 scored locations"
+    columns:
+      - name: deposit_probability
+        description: "Predicted probability of deposit presence (0-1)"
+        tests:
+          - not_null
+      - name: probability_tier
+        description: "Categorical probability tier"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['HIGH', 'MEDIUM', 'LOW', 'BACKGROUND']

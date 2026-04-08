@@ -1,0 +1,26 @@
+version: 2
+
+sources:
+  - name: geoscience_raw
+    catalog: critical_minerals
+    schema: geochem
+    tables:
+      - name: project1_features
+        description: "Geochemistry features from Project 1 — 74,349 USGS samples"
+        identifier: "05_features"
+
+      - name: project2_satellite
+        description: "Satellite spectral features from Project 2 — Landsat 8 Nevada"
+        identifier: "satellite_features"
+
+      - name: project3_composites
+        description: "Drill hole composites from Project 3 — 5,232 two-metre intervals"
+        identifier: "04_composites"
+
+      - name: project4_geophysics
+        description: "Airborne magnetic features from Project 4 — GeoDAWN survey"
+        identifier: "04_geophysics_features"
+
+      - name: project5_ml
+        description: "ML deposit predictions from Project 5 — XGBoost AUC 0.90"
+        identifier: "05_ml_predictions"
